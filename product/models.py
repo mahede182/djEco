@@ -19,9 +19,11 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
+    thumbnail = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    featured = models.BooleanField(default=False)
     rating_rate = models.DecimalField(max_digits=3, decimal_places=2)
     rating_count = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)

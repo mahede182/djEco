@@ -25,6 +25,7 @@ class Command(BaseCommand):
             Product.objects.create(
                 title=product_data['title'],
                 slug=product_data['title'],
+                thumbnail=product_data['image'],
                 price=product_data['price'],
                 description=product_data['description'],
                 category=categories[category_title],
