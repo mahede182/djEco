@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.contrib import messages
 from .models import Category, Product, Slider
 # Create your views here.
@@ -60,3 +60,27 @@ def add_to_cart(request, product_id):
         
         return redirect('product-detail', slug=product.slug)
     return redirect('home')
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'product/product-list.html'
+    context_object_name = 'products'
+    paginate_by = 5
+
+    def get_queryset(self):
+        queryset = Product.objects.all()
+        sort_by = self.request.GET.get('sort')
+        
+        if sort_by == 'price':
+            queryset = queryset.order_by('price')
+        elif sort_by == 'newest':
+            queryset = queryset.order_by('-created')
+        elif sort_by == 'orders':
+            queryset = queryset.order_by('-rating_count')
+            
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sort_by'] = self.request.GET.get('sort', '')
+        return context

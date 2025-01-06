@@ -19,9 +19,9 @@
             </div>
             <nav class="main-menu mobile-menu">
                 <ul>
-                    <li><a class="active" href="{% url 'home' %}">Home</a></li>
-                    <li><a href="">Products</a></li>
-                    <li><a href="">Categories</a>
+                    <li><a {% if request.path == '/' %}class="active"{% endif %} href="{% url 'home' %}">Home</a></li>
+                    <li><a {% if 'products' in request.path %}class="active"{% endif %} href="{% url 'product-list' %}">Products</a></li>
+                    <li><a {% if 'category' in request.path %}class="active"{% endif %} href="">Categories</a>
                         <ul class="sub-menu">
                             {% for category in categories %}
                                 <!-- categories list and displays its title in title case -->
@@ -29,7 +29,7 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a {% if 'contact' in request.path %}class="active"{% endif %} href="./contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
