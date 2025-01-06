@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
+from django.contrib import messages
 from .models import Category, Product, Slider
 # Create your views here.
 
@@ -13,3 +14,49 @@ class HomeView(TemplateView):
             'sliders': Slider.objects.all()
         })
         return context
+    
+class ProductDetailView(TemplateView):
+    model = Product
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    template_name = 'product/product-details.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = Product.objects.get(slug=self.kwargs['slug'])
+        context.update({
+            'product': product,
+            'related_products': product.related
+        })
+        return context
+
+class CategoryDetailView(TemplateView):
+    model = Category
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    template_name = 'product/category-details.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'category': Category.objects.get(slug=self.kwargs['slug'])
+        })
+        return context
+
+def add_to_cart(request, product_id):
+    if request.method == 'POST':
+        product = get_object_or_404(Product, id=product_id)
+        if not request.session.get('cart'):
+            request.session['cart'] = {}
+        
+        cart = request.session['cart']
+        product_id_str = str(product_id)
+        
+        if product_id_str in cart:
+            cart[product_id_str] += 1
+        else:
+            cart[product_id_str] = 1
+        
+        request.session.modified = True
+        messages.success(request, f'{product.title} added to cart')
+        
+        return redirect('product-detail', slug=product.slug)
+    return redirect('home')

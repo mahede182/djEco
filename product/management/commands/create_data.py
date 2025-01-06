@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from product.models import Category, Product, Slider
 import requests
-
+from django.utils.text import slugify
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         print("Creating data...")
@@ -18,13 +18,13 @@ class Command(BaseCommand):
             if category_title not in categories:
                 categories[category_title] = Category.objects.create(
                     title=category_title,
-                    slug=category_title
+                    slug=slugify(category_title)
                 )
             
             # Create product using existing category
             Product.objects.create(
                 title=product_data['title'],
-                slug=product_data['title'],
+                slug=slugify(product_data['title']),
                 thumbnail=product_data['image'],
                 price=product_data['price'],
                 description=product_data['description'],

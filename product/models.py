@@ -22,6 +22,7 @@ class Product(models.Model):
     thumbnail = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
+    in_stock = models.BooleanField(default=True)
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     featured = models.BooleanField(default=False)
     rating_rate = models.DecimalField(max_digits=3, decimal_places=2)
@@ -36,6 +37,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+    
+    @property
+    def related(self):
+        # Get all products in same category excluding current product
+        return self.category.products.exclude(pk=self.pk)
 
 class Slider(models.Model):
     title = models.CharField(max_length=200)

@@ -25,7 +25,7 @@
                         <ul class="sub-menu">
                             {% for category in categories %}
                                 <!-- categories list and displays its title in title case -->
-                                <li><a href="">{{ category.title|title }}</a></li>
+                                <li><a href="{% url 'category-detail' category.slug %}">{{ category.title|title }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>

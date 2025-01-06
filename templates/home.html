@@ -6,98 +6,14 @@
 {% block content %}
 {% include 'slider.html' %}
 
-<!-- Features Section Begin -->
-<section class="features-section spad">
-  <div class="features-ads">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="single-features-ads first">
-            <img src="{% static 'img/icons/f-delivery.png' %}" alt="" />
-            <h4>Free shipping</h4>
-            <p>
-              Fusce urna quam, euismod sit amet mollis quis, vestibulum quis
-              velit. Vesti bulum mal esuada aliquet libero viverra cursus.
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="single-features-ads second">
-            <img src="{% static 'img/icons/coin.png' %}" alt="" />
-            <h4>100% Money back</h4>
-            <p>
-              Urna quam, euismod sit amet mollis quis, vestibulum quis velit.
-              Vesti bulum mal esuada aliquet libero viverra cursus.
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="single-features-ads">
-            <img src="{% static 'img/icons/chat.png' %}" alt="" />
-            <h4>Online support 24/7</h4>
-            <p>
-              Urna quam, euismod sit amet mollis quis, vestibulum quis velit.
-              Vesti bulum mal esuada aliquet libero viverra cursus.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Features Box -->
-  <div class="features-box">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="single-box-item first-box">
-                <img src="{% static 'img/f-box-1.jpg' %}" alt="" />
-                <div class="box-text">
-                  <span class="trend-year">2019 Party</span>
-                  <h2>Jewelry</h2>
-                  <span class="trend-alert">Trend Allert</span>
-                  <a href="#" class="primary-btn">See More</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="single-box-item second-box">
-                <img src="{% static 'img/f-box-2.jpg' %}" alt="" />
-                <div class="box-text">
-                  <span class="trend-year">2019 Trend</span>
-                  <h2>Footwear</h2>
-                  <span class="trend-alert">Bold & Black</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="single-box-item large-box">
-            <img src="{% static 'img/f-box-3.jpg' %}" alt="" />
-            <div class="box-text">
-              <span class="trend-year">2019 Party</span>
-              <h2>Collection</h2>
-              <div class="trend-alert">Trend Allert</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Features Section End -->
-
-<!-- Latest Product Begin -->
+<!-- Featured Categories Begin -->
 <section class="latest-products spad">
   <div class="container">
     <div class="product-filter">
       <div class="row">
         <div class="col-lg-12 text-center">
           <div class="section-title">
-            <h2>Featured Products</h2>
+            <h2>Featured Categories</h2>
           </div>
           <ul class="product-controls">
             <li data-filter="*">All</li>
@@ -115,11 +31,11 @@
           <div class="col-lg-3 col-sm-6 mix {{category.slug}}">
             <div class="single-product-item">
               <figure>
-                <a href="#"><img style="max-width: 150px; max-height: 200px;" src="{{ product.thumbnail }}" alt="" /></a>
+                <a href="{% url 'product-detail' product.slug %}"><img style="max-width: 150px; max-height: 200px;" src="{{ product.thumbnail }}" alt="" /></a>
                 <div class="p-status">new</div>
               </figure>
               <div class="product-text">
-                <h6>{{ product.title }}</h6>
+                <h6>{{ product.title|truncatechars:20 }}</h6>
                 <p>{{ product.price }}</p>
               </div>
             </div>
@@ -130,7 +46,7 @@
     </div>
   </div>
 </section>
-<!-- Latest Product End -->
+<!-- Features Section End -->
 
 <!-- Lookbok Section Begin -->
 <section class="lookbok-section">
@@ -164,8 +80,72 @@
     </div>
   </div>
 </section>
-<!-- Lookbok Section End -->
+<!-- Features ads -->
+<section class="features-section spad">
+  <div class="features-ads">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="single-features-ads first">
+                    <img src="{% static 'img/icons/f-delivery.png' %}" alt="">
+                    <h4>Free shipping</h4>
+                    <p>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal
+                        esuada aliquet libero viverra cursus. </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="single-features-ads second">
+                    <img src="{% static 'img/icons/coin.png' %}" alt="">
+                    <h4>100% Money back </h4>
+                    <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
+                        aliquet libero viverra cursus. </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="single-features-ads">
+                    <img src="{% static 'img/icons/chat.png' %}" alt="">
+                    <h4>Online support 24/7</h4>
+                    <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
+                        aliquet libero viverra cursus. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+<!-- Latest Product Begin -->
+<section class="latest-products spad">
+  <div class="container">
+    <div class="product-filter">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="section-title">
+            <h2>Featured Products</h2>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="row" id="product-list">
+
+        {% for product in featured_products %}
+          <div class="col-lg-3 col-sm-6 mix {{category.slug}}">
+            <div class="single-product-item">
+              <figure>
+                <a href="{% url 'product-detail' product.slug %}"><img style="max-width: 150px; max-height: 200px;" src="{{ product.thumbnail }}" alt="" /></a>
+                <div class="p-status">{{ product.category.title }}</div>
+              </figure>
+              <div class="product-text">
+                <h6>{{ product.title|truncatechars:20 }}</h6>
+                <p>{{ product.price }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+    </div>
+  </div>
+</section>
 <!-- Logo Section Begin -->
 <div class="logo-section spad">
   <div class="logo-items owl-carousel">
