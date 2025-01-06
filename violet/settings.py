@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     # local apps
     'product',
     'accounts',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'product.context_processors.categories',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -115,3 +117,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+SESSION_COOKIE_NAME = 'sessionid'
+
+CART_ID = 'cart'

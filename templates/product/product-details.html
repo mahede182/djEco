@@ -45,7 +45,7 @@
                         <div class="pro-qty">
                             <input type="text" value="1" name="quantity">
                         </div>
-                        <form action="{% url 'add_to_cart' product.id %}" method="POST">
+                        <form action="{% url 'add-to-cart' product.id %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="primary-btn pc-btn">Add to cart</button>
                         </form>

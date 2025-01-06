@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.contrib import messages
 from .models import Category, Product, Slider
+from cart.carts import Cart
+
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -20,6 +22,12 @@ class ProductDetailView(TemplateView):
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     template_name = 'product/product-details.html'
+    
+    def get(self, request, *args, **kwargs):
+            cart_item = Cart(request)
+            print(cart_item)
+            return super().get(request, *args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = Product.objects.get(slug=self.kwargs['slug'])
@@ -41,25 +49,6 @@ class CategoryDetailView(TemplateView):
         })
         return context
 
-def add_to_cart(request, product_id):
-    if request.method == 'POST':
-        product = get_object_or_404(Product, id=product_id)
-        if not request.session.get('cart'):
-            request.session['cart'] = {}
-        
-        cart = request.session['cart']
-        product_id_str = str(product_id)
-        
-        if product_id_str in cart:
-            cart[product_id_str] += 1
-        else:
-            cart[product_id_str] = 1
-        
-        request.session.modified = True
-        messages.success(request, f'{product.title} added to cart')
-        
-        return redirect('product-detail', slug=product.slug)
-    return redirect('home')
 
 class ProductListView(ListView):
     model = Product
@@ -67,9 +56,18 @@ class ProductListView(ListView):
     context_object_name = 'products'
     paginate_by = 5
 
+    def get(self, request, *args, **kwargs):
+        cart_item = Cart(request)
+        print(cart_item)
+        return super().get(request, *args, **kwargs)
+    
     def get_queryset(self):
         queryset = Product.objects.all()
+        search_query = self.request.GET.get('search-input')
         sort_by = self.request.GET.get('sort')
+        
+        if search_query:
+            queryset = queryset.filter(title__icontains=search_query)
         
         if sort_by == 'price':
             queryset = queryset.order_by('price')
@@ -83,4 +81,5 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sort_by'] = self.request.GET.get('sort', '')
+        context['search_query'] = self.request.GET.get('search-input', '')
         return context
