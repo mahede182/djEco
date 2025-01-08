@@ -40,3 +40,6 @@ htmlcov/
 .coverage.*
 coverage.xml
 *.cover
+
+#added main design files
+violet-master/
