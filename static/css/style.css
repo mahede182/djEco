@@ -2046,6 +2046,16 @@ ol {
 	width: 100%;
 }
 
+/* cart empty design */
+.empty-cart {  
+	text-align: center;  
+	margin-top: 50px;  
+}  
+.empty-cart img {  
+	width: 150px;  
+	margin-bottom: 20px;  
+}  
+
 /* ---------------------------------- Responsive Media Styles ---------------------------------*/
 
 @media only screen and (min-width: 1500px) and (max-width: 1920px) {

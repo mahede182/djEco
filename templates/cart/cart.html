@@ -66,6 +66,7 @@
         </tbody>
       </table>
     </div>
+    {% if cart|length > 0 %}
     <div class="cart-btn">
       <div class="row">
         <div class="col-lg-6">
@@ -81,6 +82,9 @@
         </div>
       </div>
     </div>
+    {% else %}
+    {% include 'includes/cart-empty.html' %}
+    {% endif %}
   </div>
   {% comment %} <div class="shopping-method">
     <div class="container">
