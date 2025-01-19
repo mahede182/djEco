@@ -122,3 +122,8 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 SESSION_COOKIE_NAME = 'sessionid'
 
 CART_ID = 'cart'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailAuthenticationBackend',
+]

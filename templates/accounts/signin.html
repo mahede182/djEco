@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="page-add">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-breadcrumb">
+                    <h2>Sign In</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="contact-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form action="" method="POST" class="contact-form">
+                    {% csrf_token %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{ field }}
+                            {% if field.errors %}
+                                <small class="text-danger">{{ field.errors|striptags }}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    
+                    <button type="submit" class="site-btn">Sign In</button>
+                    <p class="mt-4" style="color: #838383;">Don't have an account? <a href="{% url 'signup' %}" style="color: #1e1e1e; text-decoration: underline;">Sign Up</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

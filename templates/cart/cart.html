@@ -67,6 +67,10 @@
       </table>
     </div>
     {% if cart|length > 0 %}
+    <div class="total-price">
+      <span>Total:</span>
+      <span>${{ cart.get_total_price }}</span>
+    </div>
     <div class="cart-btn">
       <div class="row">
         <div class="col-lg-6">
@@ -82,6 +86,7 @@
         </div>
       </div>
     </div>
+    
     {% else %}
     {% include 'includes/cart-empty.html' %}
     {% endif %}

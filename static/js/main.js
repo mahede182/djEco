@@ -170,4 +170,10 @@
         $(this).toggleClass('active');
     });
 
+    // Add this to your existing main.js
+    $(document).ready(function() {
+        // Initialize all dropdowns
+        $('.dropdown-toggle').dropdown();
+    });
+
 })(jQuery);

@@ -40,13 +40,14 @@ class Cart:
     
     def save(self):
         self.session.modified = True
-        
-    def __len__(self):
-        return len(list(self.cart.keys()))
     
     def clear(self):
-        try:
-            del self.session[self.cart_id]
-            self.save()
-        except KeyError:
-            pass
+        self.session[self.cart_id] = {}
+        self.save()
+
+    def get_total_price(self):
+        total = sum(float(item['subtotal']) for item in self)
+        return total
+
+    def __len__(self):
+        return sum(item['quantity'] for item in self.cart.values())
