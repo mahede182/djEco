@@ -41,7 +41,7 @@ MIDDLEWARE = [
     'accounts.middleware.AdminSessionMiddleware'
 ]
 
-ROOT_URLCONF = 'violet.urls'
+ROOT_URLCONF = 'volvet.urls'
 
 TEMPLATES = [
     {
@@ -62,8 +62,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'violet.wsgi.application'
-
+WSGI_APPLICATION = 'volvet.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
