@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'product',
     'accounts',
     'cart',
+    'order',
+    'cms'
 ]
 
 MIDDLEWARE = [
@@ -36,6 +38,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'accounts.middleware.AdminSessionMiddleware'
 ]
 
 ROOT_URLCONF = 'violet.urls'
@@ -53,6 +56,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'product.context_processors.categories',
                 'cart.context_processors.cart',
+                'cms.context_processors.site_settings',
             ],
         },
     },
@@ -121,9 +125,11 @@ AUTH_USER_MODEL = 'accounts.User'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 SESSION_COOKIE_NAME = 'sessionid'
 
+ADMIN_SESSION_COOKIE_NAME = 'admin_sessionid'
+
 CART_ID = 'cart'
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailAuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]

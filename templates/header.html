@@ -3,11 +3,15 @@
     <div class="container-fluid">
         <div class="inner-header">
             <div class="logo">
-                <a href="./index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                {% comment %} <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a> {% endcomment %}
+                {% if site_settings.logo %}
+                    <a href="{% url 'home' %}"><img style="max-height: 50px; width: auto;" src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}"></a>
+                {% else %}
+                    <a href="{% url 'home' %}">{{ site_settings.site_name }}</a>
+                {% endif %}
             </div>
             <div class="header-right">
                 <img src="{% static 'img/icons/search.png' %}" alt="" class="search-trigger">
-                <img src="{% static 'img/icons/man.png' %}" alt="">
                 <a href="{% url 'cart' %}">
                     <img src="{% static 'img/icons/bag.png' %}" alt="">
                     <span>{{ cart|length }}</span>
@@ -15,16 +19,10 @@
             </div>
             <div class="user-access">
                 {% if user.is_authenticated %}
-
                         <div class="dropdown">
-                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                            {% comment %} <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{ user.username }} 
+                            <a class="dropdown-item" href="{% url 'logout' %}">
+                                <img src="{% static 'img/logout.png' %}" alt="Logout" style="width: 30px; margin-right: 5px; margin-bottom: 10px;">
                             </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a>
-                                <div class="dropdown-divider"></div>
-                            </div> {% endcomment %}
                         </div>
                 {% else %}
                     <a href="{% url 'signup' %}">Register</a>

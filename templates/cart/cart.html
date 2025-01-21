@@ -67,9 +67,9 @@
       </table>
     </div>
     {% if cart|length > 0 %}
-    <div class="total-price">
-      <span>Total:</span>
-      <span>${{ cart.get_total_price }}</span>
+    <div class="total-price d-flex justify-content-center align-items-center">
+      <h5 class="me-3">Total: </h5>
+      <span style="font-weight: bold;">${{ cart.get_total_price }}</span>
     </div>
     <div class="cart-btn">
       <div class="row">
@@ -82,7 +82,9 @@
             <a href="?clear=True" class="text-decoration-none text-danger">
                 <div class="site-btn update-btn">Clear Cart</div>
             </a>
-          <div class="site-btn update-btn">Update Cart</div>
+            <a href="{% url 'checkout' %}" class="text-decoration-none text-danger">
+              <div class="site-btn update-btn">Checkout</div>
+            </a>
         </div>
       </div>
     </div>
