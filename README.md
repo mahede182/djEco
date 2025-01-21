@@ -2,7 +2,6 @@
 
 ## Features
   - User authentication
-  - RESTful API endpoints
   - Admin dashboard for managing users and content
   - Responsive design
   - Search functionality
