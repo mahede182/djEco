@@ -114,11 +114,16 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-8. Visit http://localhost:8000 in your browser
+8. Visit https://mahede182.pythonanywhere.com/ in your browser
 
 ## 💻 Admin Interface
 
-Access the admin interface at http://localhost:8000/admin to:
+Access the admin interface at https://mahede182.pythonanywhere.com/ admin to:
+
+_Credential_
+admin
+1234
+
 - Manage products and categories
 - Handle user accounts
 - Process orders
