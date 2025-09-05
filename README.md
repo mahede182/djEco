@@ -118,10 +118,12 @@ python manage.py runserver
 
 ## 💻 Admin Interface
 
-Access the admin interface at https://mahede182.pythonanywhere.com/ admin to:
+Access the admin interface at https://mahede182.pythonanywhere.com/admin admin to:
 
 _Credential_
+
 admin
+
 1234
 
 - Manage products and categories
