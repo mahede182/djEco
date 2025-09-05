@@ -1,6 +1,5 @@
 # Volvet - Modern Django eCommerce Platform
 
-<<<<<<< HEAD
 ## Features
   - User authentication
   - Admin dashboard for managing users and content
@@ -8,9 +7,8 @@
   - Search functionality
   - Pagination
   - Logo change using admin panel
-=======
+    
 A feature-rich eCommerce platform built with Django, offering a seamless shopping experience with robust admin controls and user management.
->>>>>>> c0e28ec (minor changes)
 
 ## ✨ Key Features
 
